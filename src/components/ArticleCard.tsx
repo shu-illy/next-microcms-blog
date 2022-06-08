@@ -12,6 +12,7 @@ import {
   useMantineTheme,
   createStyles,
 } from '@mantine/core';
+import { Article } from 'src/types/article';
 
 const useStyles = createStyles(theme => ({
   card: {
@@ -46,72 +47,54 @@ const useStyles = createStyles(theme => ({
 }));
 
 interface ArticleCardProps {
-  image: string;
-  link: string;
-  title: string;
-  description: string;
-  rating: string | null;
-  author: {
-    name: string;
-    image: string;
-  };
+  article: Article;
 }
 
 export function ArticleCard({
-  className,
-  image,
-  link,
-  title,
-  description,
-  author,
-  rating,
-  ...others
+  article,
 }: ArticleCardProps &
   Omit<React.ComponentPropsWithoutRef<'div'>, keyof ArticleCardProps>) {
   const { classes, cx } = useStyles();
   const theme = useMantineTheme();
   const linkProps = {
-    href: link,
+    // TODO hrefにリンクを入れる
+    href: '',
     target: '_blank',
     rel: 'noopener noreferrer',
   };
 
   return (
-    <Card
-      withBorder
-      radius="md"
-      className={cx(classes.card, className)}
-      {...others}>
+    <Card withBorder radius="md" className={cx(classes.card)}>
       <Card.Section>
         <a {...linkProps}>
-          <Image src={image} height={180} alt={''} />
+          <Image src={article.eye_catch.url} height={180} alt={''} />
         </a>
       </Card.Section>
 
-      {rating && (
+      {/* {rating && (
         <Badge
           className={classes.rating}
           variant="gradient"
           gradient={{ from: 'yellow', to: 'red' }}>
           {rating}
         </Badge>
-      )}
+      )} */}
 
       <Text className={classes.title} weight={500} component="a" {...linkProps}>
-        {title}
+        {article.title}
       </Text>
 
       <Text size="sm" color="dimmed" lineClamp={4}>
-        {description}
+        {article.body}
       </Text>
 
       <Group position="apart" className={classes.footer}>
-        <Center>
+        {/* <Center>
           <Avatar src={author.image} size={24} radius="xl" mr="xs" />
           <Text size="sm" inline>
             {author.name}
           </Text>
-        </Center>
+        </Center> */}
 
         <Group spacing={8} mr={0}>
           <ActionIcon
