@@ -111,7 +111,7 @@ const CustomHeader = ({ links }: HeaderSearchProps) => {
   });
 
   return (
-    <Header height={56} className={classes.header} mb={120}>
+    <Header height={56} className={classes.header} mb={24}>
       <Container>
         <div className={classes.inner}>
           {/* <MantineLogo variant="white" /> */}
